@@ -1,11 +1,18 @@
 {
   "name": "furniture-shop",
   "private": true,
+  "author": {
+    "name": "Morteza Sabihi",
+    "email": "mortezasabihi87@gmail.com",
+    "url": "https://mortezasabihi.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "next": "12.0.8",
@@ -13,10 +20,22 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
+    "@types/webpack-env": "^1.16.3",
+    "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.15",
     "typescript": "4.5.4"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   }
 }
