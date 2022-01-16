@@ -14,7 +14,7 @@ const Hero = () => {
         className="min-h-[calc(100vh-100px)] flex select-none"
         style={{ backgroundColor: hero.slides[hero.index].color }}
       >
-        <div className="container relative flex-grow mb-[80px]">
+        <div className="container flex relative flex-grow mb-[80px]">
           <motion.div
             key={hero.index}
             initial={{ opacity: 0 }}
@@ -25,7 +25,7 @@ const Hero = () => {
                 duration: 0.3,
               },
             }}
-            className="absolute height-full inset-0 z-0"
+            className="relative w-full flex-grow inset-0 z-0"
           >
             <Image
               src={hero.slides[hero.index].image}
