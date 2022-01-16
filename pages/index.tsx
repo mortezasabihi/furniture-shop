@@ -1,4 +1,5 @@
-import type { NextApiResponse, NextPage } from "next";
+import type { NextPage } from "next";
+import Head from "next/head";
 import type { Data as HeroData } from "types/hero";
 import type { Data as ProductsData } from "types/product";
 import Hero from "components/page/home/hero";
@@ -12,7 +13,11 @@ const Home: NextPage<{ hero: HeroData; products: ProductsData }> = ({
   products,
 }) => {
   return (
-    <div>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+
       <HeroProvider initialData={hero.slides}>
         <Hero />
       </HeroProvider>
@@ -20,7 +25,7 @@ const Home: NextPage<{ hero: HeroData; products: ProductsData }> = ({
       <ProductsContext.Provider value={{ products: products.products }}>
         <Products />
       </ProductsContext.Provider>
-    </div>
+    </>
   );
 };
 
