@@ -14,7 +14,7 @@ const Home: NextPage<{ data: Data }> = ({ data }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/hero");
+  const res = await fetch(`${process.env.NEXT_API_ROUTE}/api/hero`);
   const data: NextApiResponse<Data> = await res.json();
 
   return {
