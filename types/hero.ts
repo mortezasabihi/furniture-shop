@@ -2,7 +2,7 @@ export interface Slide {
   title: string;
   category: string;
   price: number;
-  image: StaticImageData;
+  image: string;
   color: string;
 }
 

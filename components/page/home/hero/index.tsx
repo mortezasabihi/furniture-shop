@@ -28,7 +28,7 @@ const Hero = () => {
             className="absolute height-full inset-0 z-0"
           >
             <Image
-              src={hero.slides[hero.index].image.src}
+              src={hero.slides[hero.index].image}
               alt={hero.slides[hero.index].title}
               layout="fill"
               objectFit="contain"
