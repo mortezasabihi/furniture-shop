@@ -2,11 +2,12 @@ import { useContext } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import HeroDetails from "./HeroDetails";
-import HeroPagination from "./HeroPagination";
-import { HeroContext } from "context/HeroContext";
+import SliderPagination from "components/ui/SliderPagination";
+import { HeroContext, HeroUpdateContext } from "context/HeroContext";
 
 const Hero = () => {
   const hero = useContext(HeroContext);
+  const heroUpdate = useContext(HeroUpdateContext);
 
   return (
     <AnimatePresence initial={false}>
@@ -37,7 +38,15 @@ const Hero = () => {
             />
           </motion.div>
 
-          <HeroPagination />
+          <div className="absolute bottom-0 right-0 ">
+            <SliderPagination
+              count={hero.slides.length}
+              active={hero.index}
+              onNext={heroUpdate.next}
+              onPrevious={heroUpdate.prev}
+              onSetPage={(page) => heroUpdate.setPage(page)}
+            />
+          </div>
 
           <HeroDetails />
         </div>

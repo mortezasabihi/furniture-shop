@@ -1,21 +1,37 @@
-import { useContext } from "react";
+import type { FC } from "react";
 import { motion } from "framer-motion";
-import { HeroContext, HeroUpdateContext } from "context/HeroContext";
 
-const HeroPagination = () => {
-  const hero = useContext(HeroContext);
-  const heroUpdate = useContext(HeroUpdateContext);
+interface IProps {
+  active: number;
+  count: number;
+  onNext: () => void;
+  onPrevious: () => void;
+  onSetPage: (value: number) => void;
+  vertical?: boolean;
+}
 
+const SliderPagination: FC<IProps> = ({
+  active,
+  count,
+  onNext,
+  onPrevious,
+  onSetPage,
+  vertical = false,
+}) => {
   return (
-    <ul className="absolute bottom-0 right-0 flex items-center z-10">
-      <li className="mr-[16px]">
+    <ul
+      className={`flex items-center z-10 ${
+        vertical ? "flex-col-reverse" : "flex-row"
+      }`}
+    >
+      <li className={`${vertical ? "mt-4" : "mr-4"}`}>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={heroUpdate.prev}
+          onClick={() => onPrevious()}
           type="button"
           data-testid="prev-button"
-          disabled={hero.index === 0}
+          disabled={active === 0}
           className="w-[56px] h-[56px] rounded-full flex items-center justify-center bg-[rgba(255,255,255,0.7)] disabled:opacity-[30%] disabled:cursor-not-allowed"
         >
           <svg
@@ -34,16 +50,19 @@ const HeroPagination = () => {
         </motion.button>
       </li>
 
-      {hero.slides.map((_, index) => (
+      {Array.from({ length: count }, (_, i) => i + 1).map((_, index) => (
         <li
           key={index}
-          className="flex items-center mr-[8px] last-of-type:mr-0"
+          className={`flex items-center ${vertical ? "mb-2" : "mr-2"} 
+          ${vertical && index === 0 ? "mb-0" : ""}
+          ${!vertical && index === count - 1 ? "mr-0" : ""}
+          `}
         >
           <button
-            onClick={() => heroUpdate.setPage(index)}
+            onClick={() => onSetPage(index)}
             type="button"
-            className={`w-[24px] h-[4px] rounded-[4px] ${
-              index === hero.index ? "bg-neutral-700" : "bg-white opacity-[30%]"
+            className={`${vertical ? "w-1 h-6" : "w-6 h-1"} rounded-[4px] ${
+              index === active ? "bg-neutral-700" : "bg-white opacity-[30%]"
             }`}
           >
             <span className="sr-only">{index + 1}</span>
@@ -51,14 +70,14 @@ const HeroPagination = () => {
         </li>
       ))}
 
-      <li className="ml-[16px]">
+      <li className={`${vertical ? "mb-4" : "ml-4"}`}>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={heroUpdate.next}
+          onClick={() => onNext()}
           type="button"
           data-testid="next-slide"
-          disabled={hero.index === hero.slides.length - 1}
+          disabled={active === count - 1}
           className="w-[56px] h-[56px] rounded-full flex items-center justify-center bg-[rgba(255,255,255,0.7)] disabled:opacity-[30%] disabled:cursor-not-allowed"
         >
           <svg
@@ -80,4 +99,4 @@ const HeroPagination = () => {
   );
 };
 
-export default HeroPagination;
+export default SliderPagination;

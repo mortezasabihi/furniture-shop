@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { motion } from "framer-motion";
 import { HeroContext } from "context/HeroContext";
+import CTAButton from "components/ui/CTAButton";
 
 const HeroDetails = () => {
   const hero = useContext(HeroContext);
@@ -28,14 +29,9 @@ const HeroDetails = () => {
         </div>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
-        type="button"
-        className="uppercase mt-[66px] text-2xl font-bold h-[70px] w-[260px] bg-[rgba(255,255,255,0.75)] rounded-full shadow-[0_2px_8px_0_rgba(0,0,0,0.08)]"
-      >
-        Buy
-      </motion.button>
+      <div className="mt-[66px]">
+        <CTAButton label="Buy" />
+      </div>
     </div>
   );
 };

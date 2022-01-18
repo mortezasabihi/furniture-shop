@@ -11,3 +11,7 @@ export interface Product {
 export type Data = {
   products: Product[];
 };
+
+export type ProductData = {
+  product: Product;
+};
